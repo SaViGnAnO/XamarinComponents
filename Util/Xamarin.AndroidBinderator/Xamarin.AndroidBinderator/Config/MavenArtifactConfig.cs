@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace AndroidBinderator
@@ -52,6 +52,18 @@ namespace AndroidBinderator
 
 		[JsonProperty("templateSet")]
 		public string TemplateSet { get; set; }
+
+		[JsonProperty ("downloadJavaSourceJars")]
+		public bool DownloadJavaSourceJars { get; set; } = true;
+
+		[JsonProperty ("downloadJavaDocJars")]
+		public bool DownloadJavaDocJars { get; set; } = true;
+
+		[JsonProperty ("downloadMetadataFiles")]
+		public bool DownloadMetadataFiles { get; set; } = true;
+
+		[JsonProperty ("downloadPoms")]
+		public bool DownloadPoms { get; set; } = true;
 
 		public string GroupAndArtifactId => $"{GroupId}.{ArtifactId}";
 	}

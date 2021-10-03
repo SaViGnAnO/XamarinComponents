@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -171,25 +171,25 @@ namespace AndroidBinderator
 
 				var base_file_name = Path.Combine (artifactDir, config.DownloadExternalsWithFullName ? $"{mavenArtifact.GroupId}.{mavenArtifact.ArtifactId}" : $"{mavenArtifact.ArtifactId}");
 
-				if (config.DownloadJavaSourceJars) {
+				if (mavenArtifact.DownloadJavaSourceJars) {
 					var source_file = base_file_name + "-sources.jar";
 					var source_func = new Func<Task<Stream>>(() => maven.OpenArtifactSourcesFile(mavenArtifact.GroupId, mavenArtifact.ArtifactId, version));
 					await TryDownloadFile(source_func, source_file, ErrorLevel.Info);
 				}
 
-				if (config.DownloadPoms) {
+				if (mavenArtifact.DownloadPoms) {
 					var pom_file = base_file_name + ".pom";
 					var pom_func = new Func<Task<Stream>>(() => maven.OpenArtifactPomFile(mavenArtifact.GroupId, mavenArtifact.ArtifactId, version));
 					await TryDownloadFile(pom_func, pom_file, ErrorLevel.Info);
 				}
 
-				if (config.DownloadJavaDocJars) {
+				if (mavenArtifact.DownloadJavaDocJars) {
 					var javadoc_file = base_file_name + "-javadoc.jar";
 					var javadoc_func = new Func<Task<Stream>> (() => maven.OpenArtifactDocsFile (mavenArtifact.GroupId, mavenArtifact.ArtifactId, version));
 					await TryDownloadFile (javadoc_func, javadoc_file, ErrorLevel.Info);
 				}
 
-				if (config.DownloadMetadataFiles) {
+				if (mavenArtifact.DownloadMetadataFiles) {
 					var metadata_file = base_file_name + "-metadata.xml";
 					var metadata_func = new Func<Task<Stream>>(() => maven.OpenMavenMetadataFile(mavenArtifact.GroupId, mavenArtifact.ArtifactId));
 					await TryDownloadFile(metadata_func, metadata_file, ErrorLevel.Info);
